@@ -3,6 +3,8 @@ import path from 'path';
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter";
+import authRouter from "./routes/authRouter";
+
 dotenv.config();
 console.log(__dirname);
 console.log(process.env.DB_USER);
@@ -26,6 +28,7 @@ const conection = async () =>{
 conection();
 const app = express();
 app.use(express.json());
-app.use('/api',userRouter);
+app.use('/api/user',userRouter);
+app.use('/api/auth',authRouter);
 
 app.listen(7000, ()=>console.log("app runing on port 7000"));
