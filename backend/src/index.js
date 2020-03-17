@@ -6,11 +6,8 @@ import userRouter from "./routes/userRouter";
 import authRouter from "./routes/authRouter";
 
 dotenv.config();
-console.log(__dirname);
-console.log(process.env.DB_USER);
-console.log(process.env.DBPASSWORD);
-const MONGO_URI = `mongodb://${process.env.DB_USER}:${process.env.DBPASSWORD}@localhost/mutualhelp`;
 
+const MONGO_URI = `mongodb://${process.env.DB_USER}:${process.env.DBPASSWORD}@localhost/mutualhelp`;
 
 const conection = async () =>{
     try{

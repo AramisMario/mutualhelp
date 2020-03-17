@@ -2,7 +2,6 @@ import Users from "../models/user";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 dotenv.config();
-console.log(process.env.JWTKEY);
 
 class AuthController{
     generateToken(id, email){
@@ -67,5 +66,4 @@ class AuthController{
 }
 
 const authController = new AuthController();
-console.log("authC: ",authController.generateToken());
 export default authController;

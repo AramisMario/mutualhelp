@@ -1,5 +1,6 @@
 import {Router} from "express";
 import  UserController from "../controllers/userController";
+import userController from "../controllers/userController";
 class UserRouter{
 
     constructor(){
@@ -9,6 +10,7 @@ class UserRouter{
 
     routes(){
         this.router.get('/users',UserController.getUsers);
+        this.router.post('/addMate',userController.addMate);
     }
 
 }
