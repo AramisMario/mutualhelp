@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter";
 import authRouter from "./routes/authRouter";
+import topicRouter from "./routes/topicRouter";
+import tagRouter from "./routes/tagRouter";
 
 class Server{
     constructor(){
@@ -36,6 +38,8 @@ class Server{
     routes(){
         this.app.use('/api/user',userRouter);
         this.app.use('/api/auth',authRouter);
+        this.app.use('/api/topic',topicRouter);
+        this.app.use('/api/tag',tagRouter);
     }
     start(){
         this.app.listen(7000, ()=>console.log("app runing on port 7000"));
