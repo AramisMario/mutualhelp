@@ -15,6 +15,14 @@ class UserController{
         const updated = await user.save();
         res.json(updated);
     }
+
+    async searchUsers(req, res){
+        const {userQuery} = req.params;
+        const noSpaces = userQuery.replace(/ /g,"");
+        const regex = new RegExp(`${noSpaces}`,'i');
+        const users = await Users.find({$or:[{firstname:regex},{lastname:regex},{username:regex}]});
+        res.json(users);
+    }
 }
 
 const userController = new UserController();

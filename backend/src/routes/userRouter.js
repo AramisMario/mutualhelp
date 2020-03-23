@@ -10,6 +10,7 @@ class UserRouter{
     routes(){
         this.router.get('/users',userController.getUsers);
         this.router.post('/addMate',userController.addMate);
+        this.router.get('/searchUsers/:userQuery',userController.searchUsers);
     }
 
 }

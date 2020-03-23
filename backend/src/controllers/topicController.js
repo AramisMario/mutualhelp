@@ -35,7 +35,13 @@ class TopicController{
             res.json({"message":"Error"});
         }
         
+    }
 
+    async searchTopic(req, res){
+        const {topicQuery} = req.params;
+        const regex = new RegExp(`^${topicQuery}`,'i');
+        const topics = await Topics.find({topic:regex});
+        res.json(topics);
     }
 }
 
