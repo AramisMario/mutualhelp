@@ -1,20 +1,22 @@
 import Users from "../models/user";
-import server from "../index";
-import SocketIO from "socket.io";
+//import server from "../index";
+//import SocketIO from "socket.io";
 class UserController{
 
     constructor(){
-        this.io = SocketIO(server);
+        //this.io = SocketIO(server);
+        // console.log(this.io);
     }
     
 
     async getUsers(req,res){
         const users = await Users.find();
-        this.io.on('connection',(socket)=>{
-            socket.on('testing',(data)=>{
-                this.io.sockets.emit('emiting',data);
-            })
-        });
+        // this.io.on('connection',(socket)=>{
+        //     socket.on('testing',(data)=>{
+        //         this.io.sockets.emit('emiting',data);
+        //     })
+        //     this.io.sockets.emit('emiting',{"message":"hi from server"});
+        // });
         res.json(users);   
     }
 

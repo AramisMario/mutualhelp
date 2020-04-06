@@ -6,7 +6,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/home" component={Home}/>
-        <Redirect from="/" to="/home"/>
+        {/* <Redirect from="/" to="/home"/> */}
       </Switch>    
     </BrowserRouter>
   );

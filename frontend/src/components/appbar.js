@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import axios from "axios";
+import io from "socket.io-client";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -79,6 +80,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PrimarySearchAppBar(props) {
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -112,8 +114,11 @@ export default function PrimarySearchAppBar(props) {
   const {chatButtonClick, sideNavClick} = props;
 
   useEffect(()=>{
-    // toggleDrawer();
-  });
+    const socket = io('http://localhost:7000/');
+    socket.on('emiting',function(data){
+      console.log(data);
+    });
+  },[]);
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
