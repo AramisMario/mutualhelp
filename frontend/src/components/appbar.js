@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -102,6 +103,12 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleSearch = () =>{
+    axios.get('http://localhost:7000/api/user/users')
+    .then(response=>{
+      console.log(response);
+    }).catch((Error)=>console.log(Error));
+  }
   const {chatButtonClick, sideNavClick} = props;
 
   useEffect(()=>{
@@ -167,6 +174,7 @@ export default function PrimarySearchAppBar(props) {
               <SearchIcon />
             </div>
             <InputBase
+              onClick={handleSearch}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
