@@ -1,2 +1,2 @@
 import server from "./server";
-server.start();
+export default server.start();

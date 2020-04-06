@@ -1,11 +1,21 @@
 import Users from "../models/user";
-
-
+import server from "../index";
+import SocketIO from "socket.io";
 class UserController{
+
+    constructor(){
+        this.io = SocketIO(server);
+    }
+    
 
     async getUsers(req,res){
         const users = await Users.find();
-        res.json(users);
+        this.io.on('connection',(socket)=>{
+            socket.on('testing',(data)=>{
+                this.io.sockets.emit('emiting',data);
+            })
+        });
+        res.json(users);   
     }
 
     async addMate(req,res){

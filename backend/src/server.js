@@ -44,7 +44,8 @@ class Server{
         this.app.use('/api/tag',tagRouter);
     }
     start(){
-        this.app.listen(7000, ()=>console.log("app runing on port 7000"));
+        const server = this.app.listen(7000, ()=>console.log("app runing on port 7000"));
+        return server;
     }
 }
 
