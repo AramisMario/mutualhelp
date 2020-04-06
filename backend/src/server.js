@@ -1,5 +1,6 @@
 import express from "express";
 import path from 'path';
+import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter";
@@ -33,6 +34,7 @@ class Server{
     }
 
     config(){
+        this.app.use(cors());
         this.app.use(express.json());
     }
     routes(){
