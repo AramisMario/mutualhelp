@@ -11,6 +11,7 @@ class UserRouter{
         this.router.get('/users',userController.getUsers);
         this.router.post('/addMate',userController.addMate);
         this.router.get('/searchUsers/:userQuery',userController.searchUsers);
+        this.router.post('/friendRequest',userController.sendFriendRequest);
     }
 
 }

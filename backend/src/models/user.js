@@ -1,4 +1,4 @@
-import {schema, Schema, model} from "mongoose";
+import {Schema, model} from "mongoose";
 import Bcrypt from "bcrypt";
 const userSchema = new Schema({
     firstname:{type:String, required:true, unique:true},
@@ -18,6 +18,14 @@ const userSchema = new Schema({
     mates:[{
         type:Schema.Types.ObjectId,
         ref:'Users',
+    }],
+    receivedFRequest:[{
+        type:Schema.Types.ObjectId,
+        ref:'Users',
+    }],
+    sentFRequest:[{
+        type:Schema.Types.ObjectId,
+        ref:'Users'
     }]
 });
 

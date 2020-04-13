@@ -1,22 +1,14 @@
 import Users from "../models/user";
-//import server from "../index";
-//import SocketIO from "socket.io";
+
 class UserController{
 
     constructor(){
-        //this.io = SocketIO(server);
-        // console.log(this.io);
+
     }
     
 
     async getUsers(req,res){
         const users = await Users.find();
-        // this.io.on('connection',(socket)=>{
-        //     socket.on('testing',(data)=>{
-        //         this.io.sockets.emit('emiting',data);
-        //     })
-        //     this.io.sockets.emit('emiting',{"message":"hi from server"});
-        // });
         res.json(users);   
     }
 
@@ -34,6 +26,17 @@ class UserController{
         const regex = new RegExp(`${noSpaces}`,'i');
         const users = await Users.find({$or:[{firstname:regex},{lastname:regex},{username:regex}]});
         res.json(users);
+    }
+
+    async sendFriendRequest(req,res){
+        const {username,myId} = req.body;
+        const me = await Users.findOne({_id:myId}).select("sentFRequest");
+        const userAsked = await Users.findOne({username:username}).select("username firstname lastname receivedFRequest");
+        me.sentFRequest.push(userAsked._id); 
+        userAsked.receivedFRequest.push(myId);
+        await userAsked.save();
+        await me.save();
+        res.json({"message":"solicitud enviada"});
     }
 }
 
