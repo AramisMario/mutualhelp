@@ -1,4 +1,5 @@
 import Users from "../models/user";
+import mongoose, { mongo } from "mongoose";
 
 class UserController{
 
@@ -30,7 +31,7 @@ class UserController{
 
     async sendFriendRequest(req,res){
         const {username,myId} = req.body;
-        const me = await Users.findOne({_id:myId}).select("sentFRequest");
+        const me = await Users.findById({_id:myId}).select("sentFRequest");
         const userAsked = await Users.findOne({username:username}).select("username firstname lastname receivedFRequest");
         me.sentFRequest.push(userAsked._id); 
         userAsked.receivedFRequest.push(myId);

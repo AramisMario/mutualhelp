@@ -10,13 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import axios from "axios";
-import io from "socket.io-client";
-
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -88,9 +83,9 @@ export default function PrimarySearchAppBar(props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = event => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = event => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -105,19 +100,13 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleSearch = () =>{
-    axios.get('http://localhost:7000/api/user/users')
-    .then(response=>{
-      console.log(response);
-    }).catch((Error)=>console.log(Error));
-  }
-  const {chatButtonClick, sideNavClick} = props;
+  const {chatButtonClick, sideNavClick, handleSearch} = props;
 
   useEffect(()=>{
-    const socket = io('http://localhost:7000/');
-    socket.on('emiting',function(data){
-      console.log(data);
-    });
+    // const socket = io('http://localhost:7000/');
+    // socket.on('emiting',function(data){
+    //   console.log(data);
+    // });
   },[]);
 
   const menuId = 'primary-search-account-menu';
@@ -179,7 +168,7 @@ export default function PrimarySearchAppBar(props) {
               <SearchIcon />
             </div>
             <InputBase
-              onClick={handleSearch}
+              onChange={(e)=>{handleSearch(e.target.value)}}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

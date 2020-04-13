@@ -7,6 +7,7 @@ import userRouter from "./routes/userRouter";
 import authRouter from "./routes/authRouter";
 import topicRouter from "./routes/topicRouter";
 import tagRouter from "./routes/tagRouter";
+// import bodyParser from "body-parser";
 
 class Server{
     constructor(){
@@ -35,6 +36,7 @@ class Server{
 
     config(){
         this.app.use(cors());
+        // this.app.use(bodyParser.json());
         this.app.use(express.json());
     }
     routes(){
