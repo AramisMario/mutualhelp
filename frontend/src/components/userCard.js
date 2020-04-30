@@ -25,15 +25,18 @@ const useStyles = makeStyles({
   },
 });
 
-const handleSendFRequest = async () =>{
-  axios.post('http://localhost:7000/api/user/friendRequest',{
-      'username':"JanerGonzalez",
-	    'myId':'5e8bd71b1d8a2719387eeffd' 
-  }).then((response)=>{console.log(response)})
-}
+
 
 export default function UserCard(props) {
   const classes = useStyles();
+
+  const handleSendFRequest = async () =>{
+    axios.post('http://localhost:7000/api/user/friendRequest',{
+        'username':props.username,
+        'myId':'5e8bd71b1d8a2719387eeffd' 
+    }).then((response)=>{console.log(response)})
+  }
+
 
   return (
     <Card className={classes.root} variant="outlined">

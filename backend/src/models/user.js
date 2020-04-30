@@ -1,12 +1,12 @@
 import {Schema, model} from "mongoose";
 import Bcrypt from "bcrypt";
 const userSchema = new Schema({
-    firstname:{type:String, required:true, unique:true},
-    lastname:{type:String, required:true, unique:true},
+    firstname:{type:String, required:true},
+    lastname:{type:String, required:true},
     username:{type:String,required:true, unique:true},
     email:{type:String,required:true, unique:true},
-    password:{type:String, required:true, unique:true},
-    description:{type:String, required:true, unique:true},
+    password:{type:String, required:true},
+    description:{type:String},
     weaknesses:[{
         type:Schema.Types.ObjectId,
         ref:'Topics',
@@ -34,8 +34,13 @@ userSchema.methods.encryptPassword = async (password) =>{
     return Bcrypt.hash(password,salto);
 }
 
-userSchema.methods.validatePassword = async (password) =>{
-    return Bcrypt.compare(password,this.password);
+userSchema.methods.validatePassword = async function(password){
+    try{
+        return await Bcrypt.compare(password,this.password);
+    }catch(error){
+        console.log(error);
+    }
+
 }
 
 export default model('Users',userSchema);

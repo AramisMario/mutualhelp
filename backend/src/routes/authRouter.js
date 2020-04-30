@@ -8,6 +8,7 @@ class AuthRouter{
 
     routes(){
         this.router.post('/signUp',authController.signUp.bind(authController));
+        this.router.post('/signIn',authController.signIn.bind(authController));
     }
 }
 const authRouter = new AuthRouter();

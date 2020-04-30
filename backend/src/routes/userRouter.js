@@ -1,5 +1,6 @@
 import {Router} from "express";
 import userController from "../controllers/userController";
+import verifyToken from "../middleware/verifyToken";
 class UserRouter{
 
     constructor(){
@@ -12,6 +13,7 @@ class UserRouter{
         this.router.post('/addMate',userController.addMate);
         this.router.get('/searchUsers/:userQuery',userController.searchUsers);
         this.router.post('/friendRequest',userController.sendFriendRequest);
+        this.router.post('/addInfo',verifyToken,userController.addUserInfo);
     }
 
 }

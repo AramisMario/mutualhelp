@@ -6,6 +6,7 @@ import ChatPanel from "../components/chatPanel";
 import SideNav from "../components/sideNav";
 import {useState} from "react";
 import UserCard from "../components/userCard";
+import {useEffect} from "react";
 import axios from "axios";
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,7 +38,9 @@ function Home(){
     const toggleDrawer = () =>{
       setTabs({chatpanel:false,sidenav:!tabs.sidenav,results:false});
     }
-
+    useEffect(()=>{
+      console.log(localStorage.getItem('token'));
+    });
     const handleSearch = (query) =>{
       if(query === ""){
         setUsers([]);

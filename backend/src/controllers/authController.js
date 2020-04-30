@@ -24,16 +24,15 @@ class AuthController{
                 lastname,
                 username,
                 email,
-                password,
-                description} = req.body;
+                password
+                } = req.body;
 
                 const newUser = Users({
                     firstname, 
                     lastname,
                     username,
                     email,
-                    password,
-                    description
+                    password
                 });
                     try{
                         newUser.password = await newUser.encryptPassword(newUser.password);
@@ -48,11 +47,11 @@ class AuthController{
                             
     }
 
-    async singIn(req,res){
+    async signIn(req,res){
         const {email,password} = req.body;
         try{
             const user = await Users.findOne({email:email});
-            if(user.validatePassword(password)){
+            if(await user.validatePassword(password)){
                 const token = this.generateToken(user._id, user.email);
                 res.json({"token":token});
             }else{

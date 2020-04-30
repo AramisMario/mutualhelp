@@ -11,7 +11,7 @@ class TopicRouter{
     routes(){
         this.router.post('/createTopic',topicController.createTopic);
         this.router.post('/addTag',topicController.addTag);
-        this.router.get('/searchTopic/:topicQuery',topicController.searchTopic);
+        this.router.get('/searchTopic/:topicQuery*?',topicController.searchTopic);
     }
 }
 
